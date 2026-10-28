@@ -108,10 +108,7 @@ export const roles = [
     position: "Secretary",
     org: "Gotham",
     period: "Oct 2025 – Present",
-    points: [
-      "Handle overall coordination for the club",
-      "Gotham organizes Hacktopia Pune, a 24-hour hackathon",
-    ],
+    points: ["Handle overall coordination for the club"],
   },
   {
     position: "Public Relations Lead",
