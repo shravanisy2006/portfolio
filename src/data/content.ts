@@ -114,10 +114,7 @@ export const roles = [
     position: "Public Relations Lead",
     org: "ACBS, CSBS Department Association",
     period: "Sep 2026 – Present",
-    points: [
-      "Lead public relations and outreach for the department association",
-      "Sponsor outreach for Odyssey, the department's flagship event",
-    ],
+    points: ["Lead public relations and outreach for the department association"],
   },
   {
     position: "Core Team Member",
