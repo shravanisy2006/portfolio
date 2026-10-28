@@ -1,0 +1,140 @@
+@import "tailwindcss";
+
+/* ---------- Color tokens: dark (default) ---------- */
+:root {
+  --bg: #0b0f14;
+  --surface: #121821;
+  --surface-2: #18202b;
+  --border: #233040;
+  --text: #e6edf3;
+  --muted: #9aa7b4;
+  --accent: #2dd4bf;
+  --accent-2: #22d3ee;
+  --accent-ink: #04201c;
+}
+
+/* ---------- Color tokens: light ---------- */
+[data-theme="light"] {
+  --bg: #f7fafa;
+  --surface: #ffffff;
+  --surface-2: #eef4f4;
+  --border: #d5e0e0;
+  --text: #0e1a1f;
+  --muted: #4b5b63;
+  --accent: #0f766e;
+  --accent-2: #0e7490;
+  --accent-ink: #ffffff;
+}
+
+/* ---------- Make tokens available as Tailwind classes ---------- */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-border: var(--border);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+  --color-accent-ink: var(--accent-ink);
+
+  --font-display: "Space Grotesk", system-ui, sans-serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+/* ---------- Base styles ---------- */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* ---------- Respect "reduce motion" accessibility setting ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---------- Hero background: faint dot grid + pointer glow + signal lines ---------- */
+.hero-grid {
+  --mx: 70%;
+  --my: 30%;
+}
+.hero-grid::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background-image: radial-gradient(color-mix(in oklab, var(--muted) 35%, transparent) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, #000 30%, transparent 75%);
+  opacity: 0.55;
+}
+.hero-glow {
+  background: radial-gradient(
+    600px circle at var(--mx) var(--my),
+    color-mix(in oklab, var(--accent) 12%, transparent),
+    transparent 60%
+  );
+  transition: background 0.2s ease;
+}
+.signal-line {
+  stroke-dasharray: 240 1400;
+  animation: signal 9s linear infinite;
+}
+@keyframes signal {
+  from { stroke-dashoffset: 1640; }
+  to { stroke-dashoffset: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .signal-line { animation: none; stroke-dasharray: none; opacity: 0.25; }
+}
+
+/* ---------- Section numbers: outlined display digits ---------- */
+.section-index {
+  color: transparent;
+  -webkit-text-stroke: 1.5px color-mix(in oklab, var(--accent) 55%, transparent);
+}
+
+/* ---------- Reusable dot texture ---------- */
+.hero-dots {
+  background-image: radial-gradient(color-mix(in oklab, var(--muted) 30%, transparent) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+/* ---------- Pravasa preview route ---------- */
+.route-dash {
+  animation: route 12s linear infinite;
+}
+@keyframes route {
+  to { stroke-dashoffset: -240; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .route-dash { animation: none; }
+}
